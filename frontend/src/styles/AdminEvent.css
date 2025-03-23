@@ -1,0 +1,302 @@
+/* Gradient Background */
+.admin-container {
+    display: flex;
+    height: 100vh;
+    font-family: 'Arial', sans-serif;
+}
+
+.sidebar {
+    width: 250px;
+    background: linear-gradient(to bottom,#13284c ,#0852d5, #afc6ef);
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Adds spacing between icon and text */
+}
+
+.logo-icon {
+    width: 40px; /* Adjust size as needed */
+    height: auto;
+}
+
+.logo-text {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+
+/* Gradient Background Under Menu Items */
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    position: relative;
+    position: relative;
+    top: 80px; /* Moves the header 20px downward */
+    font-weight: bold;
+
+}
+
+.sidebar nav ul::before {
+    content: "";
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 100%;
+    height: calc(100% + 20px);
+    background: linear-gradient(to right, rgba(255, 255, 255, 0.1),  rgba(255, 255, 255, 0.2));
+    border-radius: 15px;
+    z-index: -1;
+}
+
+nav ul li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.3s;
+    border-radius: 10px;
+}
+
+nav ul li img {
+    width: 20px;
+}
+
+nav ul .active {
+    background: #7fa4e3;
+    box-shadow: #1b67ea;
+}
+
+/* Logout Button */
+.logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    position: relative;
+    top: 180px; /* Moves the header 20px downward */
+    font-weight: bold;
+}
+
+.logout-btn i {
+    font-size: 5px; /* Reduces icon size */
+}
+
+/* Main Content */
+.content {
+    flex: 3;
+    padding: 5px;
+}
+
+/* Admin Profile with Background */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: linear-gradient(to right, #a1c0f5, #ffffff);
+    color: #1e3c72;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: larger;
+
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color:rgb(109, 109, 109) ;
+font-size: 12px;
+}
+
+.profile img {
+    width: 40px;
+    border-radius: 50%;
+}
+
+
+/* Event Section with Gradient */
+.events-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 20px;
+    padding: 8px;
+    background: white;
+    border-radius: 15px;
+}
+
+/* Event Cards */
+.event-card {
+    display: flex;
+    align-items: center;
+    background: white;
+    padding: 3px;
+    border-radius: 15px;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+    background: radial-gradient(circle at center, #3b82f6cc ,#edeeef , #ffffff );
+    gap: 10px;
+}
+
+.event-img {
+    width: 100px;
+}
+
+.event-info h3 {
+    font-size: 1.5rem;
+}
+
+.event-date {
+    font-weight: bold;
+    color: #444;
+    font-size: small;
+    margin-top: 2px;
+}
+
+.event-description {
+    color: #777;
+    font-size: 0.9rem;
+}
+
+/* Buttons */
+.edit-btn, .add-event-btn {
+    background: #24467f;
+    color: white;
+    border: none;
+    padding: 7px;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 120px;
+    font-weight: bold;
+}
+
+.add-event-btn {
+    width: 150px;
+    margin-top: 10px;
+    align-self: center;
+}
+
+/* Calendar */
+.calendar {
+    flex: 1;
+    padding: 25px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+/* Months Styling */
+.months {
+    display: flex;
+    flex-direction: column;  /* Stack months vertically */
+    align-items: center;  /* Keep them centered */
+    gap: 8px; /* Adjust spacing between months */
+}
+
+/* General styling for months */
+.months span {
+    /* text-transform: lowercase; */
+    color: #555;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 45px; /* Smaller width */
+    height: 30px; /* Same height for a perfect circle */
+    font-size: 17px; /* Adjust text size */
+}
+
+/* Styling for highlighted months */
+.months .highlight {
+    background: #22447f;
+    color: white;
+    border-radius: 50%; /* Makes it circular */
+    padding: 5px; /* Ensures spacing */
+}
+
+/* Inherits sidebar, header, and other shared styles from your existing CSS */
+.new-event-form-container {
+    margin: 30px auto; /* Réduction de margin-top pour remonter */
+    width: 700px; /* Plus large que la sidebar */
+    margin: 50px auto; /* Centré horizontalement */
+    background: radial-gradient(circle at center, #3b82f6cc ,#edeeef , #ffffff );
+    border-radius: 15px;
+    padding: 12px; /* Moins d'espace pour réduire la hauteur */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border: 2px solid #24467f; /* Bordure bleue */
+
+}
+
+.new-event-btn {
+    width: 100%;
+    background: #24467f;
+    color: white;
+    border: none;
+    padding: 8px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.event-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px; /* Moins d’espace entre les champs */
+}
+
+.event-form label {
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+}
+
+.event-form input {
+    width: 100%;
+    padding: 4px; /* Moins d’espace vertical */
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 12px;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.cancel-btn,
+.add-btn {
+    width: 48%;
+    padding: 6px; /* Boutons plus petits */
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cancel-btn {
+    background-color: #d9534f;
+    color: white;
+}
+
+.add-btn {
+    background-color: #24467f;
+    color: white;
+}

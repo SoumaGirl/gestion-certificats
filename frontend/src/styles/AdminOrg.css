@@ -1,0 +1,212 @@
+.admin-container {
+    display: flex;
+    height: 100vh;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background: linear-gradient(to bottom,#13284c ,#0852d5, #afc6ef);
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.logo-icon {
+    width: 40px;
+    height: auto;
+}
+
+.logo-text {
+    font-size: 1.8rem;
+    font-weight: bold;
+}
+
+.sidebar nav ul {
+    list-style: none;
+    padding: 0;
+    position: relative;
+    top: 80px;
+    font-weight: bold;
+}
+
+nav ul li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.3s;
+    border-radius: 10px;
+}
+
+nav ul .active {
+    background: #598be0;
+}
+
+.logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    position: relative;
+    top: 180px;
+    font-weight: bold;
+}
+
+/* Main Content */
+.content {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    padding: 0; /* Supprimer tout padding inutile */
+}
+
+/* Header */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    background: linear-gradient(to right, #a1c0f5, #ffffff);
+    color: #1e3c72;
+    border-radius: 15px;
+    font-weight: bold;
+    font-size: larger;
+}
+
+
+
+
+.header-icon {
+    width: 34px;  /* Adjust the size as needed */
+    height: auto;
+    margin-right: 8px; /* Space between icon and text */
+    vertical-align: middle;
+    color: #13284c;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: rgb(109, 109, 109);
+    font-size: 12px;
+}
+
+.profile img {
+    width: 40px;
+    border-radius: 50%;
+}
+
+/* Organizer Form */
+.form-container {
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    margin: 30px auto;
+    border: 2px solid #24467f;
+    background: radial-gradient(circle at center, #3b82f6cc ,#edeeef , #ffffff );
+
+}
+
+.organizer-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Espace entre le titre et la liste des organisateurs */
+.organizers-section h2 {
+    margin-bottom: 40px; /* Augmente l'espace sous le titre */
+}
+
+/* Ajouter un peu d'espace entre les noms */
+.organizers-section ul {
+    padding-left: 15px; /* Décaler la liste légèrement à droite */
+    line-height: 2; /* Augmenter l'espacement entre les lignes */
+}
+
+
+.organizer-form label {
+    font-weight: bold;
+    text-align: left;
+}
+
+.organizer-form input {
+    width: 100%;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.form-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.cancel-btn,
+.add-btn {
+    width: 40%;
+    padding: 6px; /* Boutons plus petits */
+    border: none;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.cancel-btn {
+    background-color: #d9534f;
+    color: white;
+}
+
+.add-btn {
+    background-color: #24467f;
+    color: white;
+}
+
+
+/* Organizers List */
+.organizers-list {
+    flex: 1;
+    padding: 20px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.organizers-list h3 {
+    color: #1e3c72;
+    margin-bottom: 60px;
+    font-weight: bold;
+}
+
+.organizers-list ul {
+    list-style: none;
+    padding: 0;
+    color: #444;
+}
+
+.organizers-list li {
+    padding: 5px 0;
+}
