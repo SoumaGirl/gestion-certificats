@@ -4,7 +4,8 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import java.time.LocalDate;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "events")
@@ -20,17 +21,18 @@ public class Event {
     @Column(nullable = false)
     private String title;
 
-    @Column(columnDefinition = "TEXT")
+    @Column(nullable = false)
     private String description;
 
     @Column(nullable = false)
-    private LocalDate date;
+    private LocalDateTime date;
 
-    private String location;
+
+
+
 
     @ManyToOne
     @JoinColumn(name = "organizer_id", nullable = false)
     private Organizer organizer;
 
-    private String imageUrl;
 }

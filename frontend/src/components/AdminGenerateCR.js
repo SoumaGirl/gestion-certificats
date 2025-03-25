@@ -1,16 +1,59 @@
-import React from "react";
-import "../styles/AdminGenerateCR.css"; 
+import React, { useState } from "react";
+import axios from "axios"; // Import Axios
+import "../styles/AdminGenerateCR.css";
+import { downloadCertificate } from "../services/certificateService";
 import eventIcon from "../assets/events.png"; 
 import organizerIcon from "../assets/organizers.png"; 
 import reportIcon from "../assets/generate.png"; 
 import logoutIcon from "../assets/logout.png"; 
 import profilePic from "../assets/user.png"; 
 import logoIcon from "../assets/logo.png"; 
-import download from "../assets/download.png"; // Icon for Download Button
+import download from "../assets/download.png"; 
 import gen from "../assets/gen.png"; 
 
-
 const AdminGenerateCR = () => {
+    const [eventName, setEventName] = useState("");
+    const [participantsFile, setParticipantsFile] = useState(null);
+
+    const handleGenerate = (e) => {
+        e.preventDefault();
+
+        // Get the token from localStorage
+        const token = localStorage.getItem("token");
+
+        if (!token) {
+            console.error("Token is missing. Please login again.");
+            return;
+        }
+
+        // Create form data to send
+        const formData = new FormData();
+        formData.append("event", eventName);
+        formData.append("participants", participantsFile);
+
+        // Make the POST request to your backend API with the token in the Authorization header
+        axios.post("https://api.example.com/generate-report", formData, {
+            headers: {
+                "Authorization": `Bearer ${token}` // Add token to request headers
+            }
+        })
+            .then((response) => {
+                console.log("Report Generated:", response.data);
+                // Handle success (e.g., show a success message)
+            })
+            .catch((error) => {
+                console.error("There was an error generating the report:", error);
+                // Handle error (e.g., show an error message)
+            });
+    };
+
+const handleDownload = () => {
+    if (!eventName) {
+        alert("Veuillez entrer un nom d'événement !");
+        return;
+    }
+    downloadCertificate(eventName); // Appelle la fonction avec l'ID de l'événement
+};
     return (
         <div className="admin-container">
             {/* Sidebar */}
@@ -57,29 +100,35 @@ const AdminGenerateCR = () => {
 
                 {/* Form Section */}
                 <div className="form-container">
-
-                    <form className="generate-form">
+                    <form className="generate-form" onSubmit={handleGenerate}>
                         <label>Event:</label>
-                        <input type="text" placeholder="Enter event name" />
+                        <input 
+                            type="text" 
+                            placeholder="Enter event name" 
+                            value={eventName}
+                            onChange={(e) => setEventName(e.target.value)} 
+                        />
 
-                        <label>Participants :</label>
-                        <input type="file" />
+                        <label>Participants:</label>
+                        <input 
+                            type="file" 
+                            onChange={(e) => setParticipantsFile(e.target.files[0])} 
+                        />
 
                         {/* Buttons */}
                         <div className="form-buttons">
                             <button className="cancel-btn">Cancel</button>
-                            <button className="generate-btn">Generate</button>
+                            <button type="submit" className="generate-btn">Generate</button>
                         </div>
                     </form>
                 </div>
 
                 {/* Download & Publish Buttons */}
                 <div className="action-buttons">
-                    <button className="download-btn">
-                        <img src={download} alt="download" className="button-icon" />
-                        Download Certificate
-                    </button>
-                    <button className="publish-btn">Publish Certificates</button>
+                   <button className="download-btn" onClick={handleDownload}>
+                       <img src={download} alt="download" className="button-icon" />
+                       Download Certificate
+                   </button>
                 </div>
             </main>
         </div>

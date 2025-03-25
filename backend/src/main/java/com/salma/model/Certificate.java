@@ -1,45 +1,70 @@
 package com.salma.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import java.time.LocalDateTime;
+
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "certificates")
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 public class Certificate {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    private String recipientName;
+    private String eventName;
+    private LocalDate issueDate;
 
-    @ManyToOne
-    @JoinColumn(name = "event_id", nullable = false)
-    private Event event;
+    @Lob
+    private byte[] pdfData;  // To store the generated PDF in the database (optional)
 
-    @ManyToOne
-    @JoinColumn(name = "participation_type_id", nullable = false)
-    private ParticipationType participationType;
+    public Certificate() {}
 
-    @Column(nullable = false)
-    private String filePath;
+    public Certificate(String recipientName, String eventName, LocalDate issueDate) {
+        this.recipientName = recipientName;
+        this.eventName = eventName;
+        this.issueDate = issueDate;
+    }
 
-    @ManyToOne
-    @JoinColumn(name = "signed_by", nullable = false)
-    private User signedBy;
+    public Long getId() {
+        return id;
+    }
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private CertificateStatus status = CertificateStatus.PENDING;
+    public String getRecipientName() {
+        return recipientName;
+    }
 
-    @Column(nullable = false)
-    private LocalDateTime issuedAt = LocalDateTime.now();
+    public String getEventName() {
+        return eventName;
+    }
+
+    public LocalDate getIssueDate() {
+        return issueDate;
+    }
+
+    public byte[] getPdfData() {
+        return pdfData;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setRecipientName(String recipientName) {
+        this.recipientName = recipientName;
+    }
+
+    public void setEventName(String eventName) {
+        this.eventName = eventName;
+    }
+
+    public void setIssueDate(LocalDate issueDate) {
+        this.issueDate = issueDate;
+    }
+
+    public void setPdfData(byte[] pdfData) {
+        this.pdfData = pdfData;
+    }
 }
+

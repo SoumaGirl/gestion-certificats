@@ -1,26 +1,24 @@
 package com.salma.model;
 
-
+import com.fasterxml.jackson.databind.annotation.JsonAppend;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
-import java.time.LocalDateTime;
+import lombok.Setter;
+
 
 @Entity
-@Table(name = "users")
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
-
+@AllArgsConstructor
+@Table(name = "users")
 public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column(nullable = false)
-    private String name;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -28,11 +26,24 @@ public class User {
     @Column(nullable = false)
     private String password;
 
+    @Transient
+    private String token;
+    ; // Enum for roles (ADMIN, ORGANIZER, PARTICIPANT)
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private USER_ROLE role;
+    public String getEmail() {
+        return email;
+    }
 
-    @Column(nullable = false, updatable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
+    public String getPassword() {
+        return password;
+    }
+
+
+    public void setToken(String token) {
+    }
+
+    public JsonAppend.Prop getRole() {
+        JsonAppend.Prop role = null;
+        return role;
+    }
 }
