@@ -5,6 +5,9 @@ import AdminEvent from "./components/AdminEvent";
 import AddEvent from "./components/AddEvent"; 
 import AdminOrg from "./components/AdminOrg"; 
 import AdminGenerateCR from "./components/AdminGenerateCR"; 
+import PARdashboard from "./components/PARdashboard"; 
+import PARcertificates from "./components/PARcertificates"; 
+
 
 
 
@@ -18,6 +21,11 @@ function App() {
                 <Route path="/AddEvent" element={<AddEvent />} /> {/* New Route */}
                 <Route path="/AdminOrg" element={<AdminOrg />} /> {/* New Route */}
                 <Route path="/AdminGenerateCR" element={<AdminGenerateCR />} /> {/* New Route */}
+                <Route path="/PARdashboard" element={<PARdashboard />} /> {/* New Route */}
+                <Route path="/PARcertificates" element={<PARcertificates />} /> {/* New Route */}
+
+
+
 
             </Routes>
         </Router>
