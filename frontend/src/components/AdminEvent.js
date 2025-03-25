@@ -1,26 +1,62 @@
-import React from "react";
-import "../styles/AdminEvent.css"; // Ensure this file is correctly linked
-import eventIcon from "../assets/events.png"; // Icon for event section
-import organizerIcon from "../assets/organizers.png"; // Icon for organizers section
-import reportIcon from "../assets/generate.png"; // Icon for Generate CR section
-import logoutIcon from "../assets/logout.png"; // Logout icon
-import profilePic from "../assets/user.png"; // Profile picture
-import eventImage from "../assets/event.png"; // Illustration inside event card
-import logoIcon from "../assets/logo.png"; // Illustration inside event card
+import React, { useState } from "react";
+import axios from "axios"; // Import Axios
+import "../styles/AdminGenerateCR.css"; 
+import eventIcon from "../assets/events.png"; 
+import organizerIcon from "../assets/organizers.png"; 
+import reportIcon from "../assets/generate.png"; 
+import logoutIcon from "../assets/logout.png"; 
+import profilePic from "../assets/user.png"; 
+import logoIcon from "../assets/logo.png"; 
+import download from "../assets/download.png"; 
+import gen from "../assets/gen.png"; 
 
+const AdminGenerateCR = () => {
+    const [eventName, setEventName] = useState("");
+    const [participantsFile, setParticipantsFile] = useState(null);
 
-const AdminEvent = () => {
+    const handleGenerate = (e) => {
+        e.preventDefault();
+
+        // Get the token from localStorage
+        const token = localStorage.getItem("AdminEventToken");
+
+        if (!token) {
+            console.error("Token is missing. Please login again.");
+            return;
+        }
+
+        // Create form data to send
+        const formData = new FormData();
+        formData.append("event", eventName);
+        formData.append("participants", participantsFile);
+
+        // Make the POST request to your backend API with the token in the Authorization header
+        axios.post("https://api.example.com/generate-report", formData, {
+            headers: {
+                "Authorization": `Bearer ${token}` // Add token to request headers
+            }
+        })
+            .then((response) => {
+                console.log("Report Generated:", response.data);
+                // Handle success (e.g., show a success message)
+            })
+            .catch((error) => {
+                console.error("There was an error generating the report:", error);
+                // Handle error (e.g., show an error message)
+            });
+    };
+
     return (
         <div className="admin-container">
             {/* Sidebar */}
             <aside className="sidebar">
-            <div className="logo-container">
-        <img src={logoIcon} alt="logo" className="logo-icon" />
-        <span className="logo-text">MYCERTS</span>
-    </div>
+                <div className="logo-container">
+                    <img src={logoIcon} alt="logo" className="logo-icon" />
+                    <span className="logo-text">MYCERTS</span>
+                </div>
                 <nav>
                     <ul>
-                        <li className="active">
+                        <li>
                             <img src={eventIcon} alt="Events" />
                             <span>Events</span>
                         </li>
@@ -28,7 +64,7 @@ const AdminEvent = () => {
                             <img src={organizerIcon} alt="Organizers" />
                             <span>Organizers</span>
                         </li>
-                        <li>
+                        <li className="active">
                             <img src={reportIcon} alt="Generate CR" />
                             <span>Generate CR</span>
                         </li>
@@ -44,70 +80,52 @@ const AdminEvent = () => {
             <main className="content">
                 {/* Header */}
                 <div className="header">
-                    <h2>📅 <span>Events</span></h2>
+                    <h2>
+                        <img src={gen} alt="gen" className="header-icon" />
+                        <span>Generate CR</span>
+                    </h2>
                     <div className="profile">
                         <span>S. Admin</span>
-                        {/* <p>Prof</p> */}
                         <img src={profilePic} alt="Admin Profile" />
                     </div>
                 </div>
 
-                {/* Events List */}
-                <div className="events-container">
-                    <div className="event-card">
-                        <img src={eventImage} alt="Marketing Digital" className="event-img" />
-                        <div className="event-info">
-                            <h4>Marketing Digital</h4>
-                            <p className="event-date">March 2025</p>
-                            <p className="event-description">
-                                Discover essential digital marketing strategies to effectively promote a brand,
-increase its online presence.
-                            </p>
-                        </div>
-                        <button className="edit-btn">Edit</button>
-                    </div>
+                {/* Form Section */}
+                <div className="form-container">
+                    <form className="generate-form" onSubmit={handleGenerate}>
+                        <label>Event:</label>
+                        <input 
+                            type="text" 
+                            placeholder="Enter event name" 
+                            value={eventName}
+                            onChange={(e) => setEventName(e.target.value)} 
+                        />
 
-                    <div className="event-card">
-                        <img src={eventImage} alt="Machine Learning" className="event-img" />
-                        <div className="event-info">
-                            <h4>Machine Learning</h4>
-                            <p className="event-date">April 2025</p>
-                            <p className="event-description">
-                                Get started with artificial intelligence and learn how to build effective predictive models.
-                            </p>
-                        </div>
-                        <button className="edit-btn">Edit</button>
-                    </div>
+                        <label>Participants:</label>
+                        <input 
+                            type="file" 
+                            onChange={(e) => setParticipantsFile(e.target.files[0])} 
+                        />
 
-                    <button className="add-event-btn">Add Event</button>
+                        {/* Buttons */}
+                        <div className="form-buttons">
+                            <button className="cancel-btn">Cancel</button>
+                            <button type="submit" className="generate-btn">Generate</button>
+                        </div>
+                    </form>
+                </div>
+
+                {/* Download & Publish Buttons */}
+                <div className="action-buttons">
+                    <button className="download-btn">
+                        <img src={download} alt="download" className="button-icon" />
+                        Download Certificate
+                    </button>
+                    <button className="publish-btn">Publish Certificates</button>
                 </div>
             </main>
-
-            {/* Calendar */}
-            <div className="calendar">
-                <h2>CALENDAR 2025</h2>
-                <div className="months">
-                    {["January",
-                     "February",
-                      "March",
-                       "April", 
-                       "May",
-                        "June",
-                      "July",
-                       "August", 
-                       "September", 
-                       "October",
-                        "November",
-                         "December"]
-                      .map((month, index) => (
-                        <span key={index} className={month === "April" || month === "March" ? "highlight" : ""} >
-                            {month.toLowerCase()}
-                        </span>
-                    ))}
-                </div>
-            </div>
         </div>
     );
 };
 
-export default AdminEvent;
+export default AdminGenerateCR;

@@ -1,14 +1,33 @@
-import React from "react";
-import "../styles/AdminEvent.css";
-import eventIcon from "../assets/events.png";
-import certificateIcon from "../assets/certificate.png";
-import logoutIcon from "../assets/logout.png";
-import profilePic from "../assets/user.png";
-import logoIcon from "../assets/logo.png";
-import { FaCertificate, FaUpload } from "react-icons/fa";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import "../styles/AdminEvent.css"; // Assure-toi que ce fichier est correctement lié
+import certificateIcon from "../assets/certificate.png"; // Icône pour la section des certificats
+import eventIcon from "../assets/events.png"; // Icône pour la section des événements
+import logoutIcon from "../assets/logout.png"; // Icône de déconnexion
+import profilePic from "../assets/user.png"; // Photo de profil
+import logoIcon from "../assets/logo.png"; // Icône de logo
 
 const PARcertificates = () => {
-  const certificates = ["Marketing Digital", "Machine Learning", "Artificial Intelligence"];
+  const [certificates, setCertificates] = useState([]);
+
+  useEffect(() => {
+    // Fonction pour récupérer les certificats
+    const fetchCertificates = async () => {
+      const token = localStorage.getItem("token"); // Récupérer le token depuis le localStorage
+      if (token) {
+        try {
+          const response = await axios.get("https://ton-api.com/certificates", {
+            headers: { Authorization: `Bearer ${token}` }, // Ajoute le token dans les en-têtes
+          });
+          setCertificates(response.data); // Assigner les données récupérées à l'état
+        } catch (error) {
+          console.error("Erreur lors de la récupération des certificats:", error);
+        }
+      }
+    };
+
+    fetchCertificates(); // Appel de la fonction pour récupérer les certificats
+  }, []); // Cette fonction sera appelée au montage du composant
 
   return (
     <div className="admin-container">
@@ -49,15 +68,16 @@ const PARcertificates = () => {
 
         {/* Certificates List */}
         <section className="certificates-list">
-          {certificates.map((cert, index) => (
-            <div key={index} className="certificate-item">
-              <FaCertificate className="cert-icon" />
-              <span>{cert}</span>
-              <button className="upload-btn">
-                <FaUpload /> Upload
-              </button>
-            </div>
-          ))}
+          {certificates.length > 0 ? (
+            certificates.map((cert, index) => (
+              <div key={index} className="certificate-item">
+                <span>{cert.name}</span> {/* Affichage du nom du certificat */}
+                <button className="upload-btn">Upload</button> {/* Bouton pour télécharger le certificat */}
+              </div>
+            ))
+          ) : (
+            <p>No certificates available</p> // Message si aucun certificat n'est disponible
+          )}
         </section>
       </main>
     </div>
