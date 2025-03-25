@@ -7,6 +7,10 @@ import AdminOrg from "./components/AdminOrg";
 import AdminGenerateCR from "./components/AdminGenerateCR"; 
 import PARdashboard from "./components/PARdashboard"; 
 import PARcertificates from "./components/PARcertificates"; 
+import ORGdashboard from "./components/ORGdashboard"; 
+import ORGaddparticipants from "./components/ORGaddparticipants"; 
+
+
 
 
 
@@ -23,6 +27,10 @@ function App() {
                 <Route path="/AdminGenerateCR" element={<AdminGenerateCR />} /> {/* New Route */}
                 <Route path="/PARdashboard" element={<PARdashboard />} /> {/* New Route */}
                 <Route path="/PARcertificates" element={<PARcertificates />} /> {/* New Route */}
+                <Route path="/ORGdashboard" element={<ORGdashboard />} /> {/* New Route */}
+                <Route path="/ORGaddparticipants" element={<ORGaddparticipants />} /> {/* New Route */}
+
+
 
 
 
